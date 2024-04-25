@@ -36,4 +36,13 @@ public final class Board {
     public void setBoard(List<List<Cell>> board) {
         this.board = board;
     }
+    public Cell getCell(int row, int col) {
+        return board.get(row).get(col);
+    }
+
+    public void setCell(int row, int col, Cell cell) {
+        board.get(row).set(col, cell);
+    }
+
+
 }
