@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InvalidMoveException {
+    public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         GameController gameControllerInstance = new GameController();
 
@@ -19,9 +19,14 @@ public class Main {
 
         Game currentGame = gameControllerInstance.startGame(gameDimension, gamePlayers);
 
-        while (GameState.IN_PROGRESS.equals(currentGame.getState())) {
-            gameControllerInstance.printBoard(currentGame);
-            gameControllerInstance.makeMove(currentGame);
+        try {
+            while (GameState.IN_PROGRESS.equals(currentGame.getState())) {
+                gameControllerInstance.printBoard(currentGame);
+                gameControllerInstance.makeMove(currentGame);
+            }
+        }
+        catch (InvalidMoveException e) {
+            System.out.println(e.getMessage());
         }
 
         if (!GameState.ENDED.equals(gameControllerInstance.checkState(currentGame))) {
